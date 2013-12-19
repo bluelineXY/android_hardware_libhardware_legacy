@@ -950,7 +950,10 @@ int wifi_connect_to_supplicant()
     if (access(IFACE_DIR, F_OK) == 0) {
         snprintf(path, sizeof(path), "%s/%s", IFACE_DIR, primary_iface);
     } else {
-        snprintf(path, sizeof(path), "@android:wpa_%s", primary_iface);
+        // not for TI
+        //snprintf(path, sizeof(path), "@android:wpa_%s", primary_iface);
+         snprintf(path, sizeof(path), "/dev/socket/wpa_%s", primary_iface);
+
     }
     return wifi_connect_on_socket_path(path);
 }
@@ -1159,3 +1162,4 @@ int wifi_set_mode(int mode) {
     wifi_mode = mode;
     return 0;
 }
+
